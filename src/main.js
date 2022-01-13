@@ -1,5 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-createApp(App).use(router).mount('#app')
+import Oruga from '@oruga-ui/oruga-next'
+import '@oruga-ui/oruga-next/dist/oruga.css'
+const app = createApp(App)
+app.use(router)
+app.use(Oruga)
+app.mount('#app')
 // # sourceMappingURL=main.js.map
