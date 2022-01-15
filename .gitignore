@@ -2,8 +2,6 @@
 node_modules
 /dist
 .pdf
-package.json
-package-lock.json
 
 
 # local env files
