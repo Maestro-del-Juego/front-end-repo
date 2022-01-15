@@ -3,8 +3,6 @@ import axios from 'axios'
 
 const state = reactive({
   username: '',
-  password: '',
-  rePassword: '',
   auth_token: '',
   error: '',
   loggedIn: false
@@ -34,19 +32,31 @@ const login = (username: string, password: string) => {
       if (data && data.data.auth_token) {
         login(username, password)
         state.auth_token = data.data.auth_token
+        console.log(state.auth_token)
+        state.username = username
+        localStorage.name = username
+        localStorage.auth_token = data.data.auth_token
       }
-      localStorage.name = username
     })
-    .catch((error) => alert(error.message))
+    .catch((error) => {
+      state.error = error.message
+    })
 }
 
 const register = (username: string, password: string, rePassword: string) => {
   if (password === rePassword) {
-    axios.post('https://maestrodeljuego.herokuapp.com/auth/users/', {
-      username: username,
-      password: password,
-      re_password: rePassword
-    })
+    axios
+      .post('https://maestrodeljuego.herokuapp.com/auth/users/', {
+        username: username,
+        password: password,
+        re_password: rePassword
+      })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        state.error = error.message
+      })
 
     axios
       .post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
@@ -60,9 +70,11 @@ const register = (username: string, password: string, rePassword: string) => {
           state.auth_token = data.data.auth_token
         }
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => {
+        state.error = error.message
+      })
   } else {
-    alert('Password and Re-typed Password do not match!')
+    state.error = 'Password and Re-typed Password do not match!'
   }
 }
 
@@ -70,7 +82,6 @@ const logout = () => {
   console.log('Logging out...')
   state.loggedIn = false
   state.username = ''
-  state.password = ''
   axios
     .post(
       'https://maestrodeljuego.herokuapp.com/auth/token/logout/',
@@ -83,7 +94,10 @@ const logout = () => {
     )
     .then((res) => {
       console.log(res)
-      localStorage.name = null
+      localStorage.clear()
+    })
+    .catch((error) => {
+      state.error = error.message
     })
 }
 

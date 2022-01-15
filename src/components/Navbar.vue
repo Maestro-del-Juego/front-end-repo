@@ -20,7 +20,7 @@
       <button
         v-if="userStore.state.loggedIn"
         type="submit"
-        @click="userStore.logout()"
+        @click.prevent="userStore.logout()"
       >
         Log Out
       </button>

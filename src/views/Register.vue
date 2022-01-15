@@ -31,7 +31,9 @@
       />
     </div>
     <div class="text-danger my-2">{{ userStore.state.error }}</div>
-    <button class="btn btn-success btn-block my-2" type="submit">Register</button>
+    <button class="btn btn-success btn-block my-2" type="submit">
+      Register
+    </button>
   </form>
 </template>
 
