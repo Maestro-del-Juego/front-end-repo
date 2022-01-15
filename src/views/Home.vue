@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Board game stock image" src="../assets/BoardGameStock1.jpeg" />
+    <img class="home-image" alt="Board game stock image" src="../assets/BoardGameStock1.jpeg" />
     <div class="feature-list">
       <FeatureBlock
         featureName="Feature Name 1"
@@ -59,8 +59,8 @@ export default class Home extends Vue {}
   width: 25%;
   margin-left: 5%;
   }
-img {
+.home-image {
+  height: 450px;
   width: 80%;
-  height: 400px;
 }
 </style>
