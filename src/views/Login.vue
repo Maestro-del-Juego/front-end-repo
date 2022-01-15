@@ -1,21 +1,27 @@
 <template>
-  <form>
+  <form @submit.prevent="onSubmit">
     <h2>Login</h2>
-    <o-field label="User E-mail">
-      <o-input
-        placeholder="Email"
-        v-model="email"
-        type="email"
-        icon="envelope"
-        icon-right="times-circle"
+    <div class="form-group my-2">
+      <label>Username</label>
+      <input
+        v-model="form.username"
+        class="form-control"
+        placeholder="Username"
         required
-      >
-      </o-input>
-    </o-field>
-    <o-field label="Password" variant="warning">
-      <o-input value="123" type="password" maxlength="30"></o-input>
-    </o-field>
-    <o-button type="submit">Submit</o-button>
+      />
+    </div>
+    <div class="form-group my-2">
+      <label>Password</label>
+      <input
+        v-model="form.password"
+        class="form-control"
+        type="password"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <div class="text-danger my-2">{{ userStore.state.error }}</div>
+    <button class="btn btn-success btn-block my-2" type="submit">Login</button>
   </form>
 </template>
 
@@ -28,5 +34,20 @@ form {
 </style>
 
 <script lang="ts">
-export default {}
+import { defineComponent, reactive } from 'vue'
+import userStore from '@/stores/user'
+export default defineComponent({
+  setup () {
+    const form = reactive({
+      username: '',
+      password: ''
+    })
+    const onSubmit = () => {
+      userStore.login(form.username, form.password)
+      form.username = ''
+      form.password = ''
+    }
+    return { form, userStore, onSubmit }
+  }
+})
 </script>

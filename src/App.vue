@@ -25,6 +25,7 @@ export default defineComponent({
   },
   setup () {
     onMounted(userStore.checkUser)
+    return { userStore }
   }
 })
 </script>
