@@ -16,14 +16,18 @@ const checkUser = () => {
   if (localStorage.name) state.name = localStorage.name
 }
 
-const login = () => {
-  axios.
-}
+// const login = () => {
+//   axios.
+// }
 
-const register = () => {
-  axios.
-}
+// const register = () => {
+//   axios.
+// }
 
-const logout = () => {
-  axios.
-}
+// const logout = () => {
+//   axios.
+// }
+
+export default { state, getters, checkUser }
+
+// login, register, logout}

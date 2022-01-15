@@ -15,7 +15,8 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
+import Navbar from '@/components/Navbar.vue'
+import userStore from '@/stores/user' // @ is an alias to /src
 
 export default defineComponent({
   name: 'App',
@@ -23,7 +24,7 @@ export default defineComponent({
     Navbar
   },
   setup () {
-    onMounted(userStore.getUser)
+    onMounted(userStore.checkUser)
   }
 })
 </script>
