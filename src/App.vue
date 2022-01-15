@@ -14,13 +14,16 @@
 </style>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { defineComponent, onMounted } from 'vue'
 import Navbar from '@/components/Navbar.vue' // @ is an alias to /src
 
-@Options({
+export default defineComponent({
+  name: 'App',
   components: {
     Navbar
+  },
+  setup () {
+    onMounted(userStore.getUser)
   }
 })
-export default class Home extends Vue {}
 </script>
