@@ -8,8 +8,22 @@
       <router-link to="/about">Game Night!</router-link>
     </div>
     <div id="account-links">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link>
+      <router-link v-if="!userStore.state.loggedIn" to="/login"
+        >Login</router-link
+      >
+      |
+      <p v-if="userStore.state.loggedIn">You're Logged In!</p>
+      |
+      <router-link v-if="!userStore.state.loggedIn" to="/register"
+        >Register</router-link
+      >
+      <button
+        v-if="userStore.state.loggedIn"
+        type="submit"
+        @click="userStore.logout()"
+      >
+        Log Out
+      </button>
     </div>
   </div>
   <hr id="hr-one" />
@@ -59,3 +73,13 @@ hr {
   margin: 0px;
 }
 </style>
+<script>
+import { defineComponent } from 'vue'
+import userStore from '@/stores/user'
+
+export default defineComponent({
+  setup () {
+    return { userStore }
+  }
+})
+</script>

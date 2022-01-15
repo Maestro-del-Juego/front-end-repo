@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form @submit="onSubmit">
     <h2>Register</h2>
     <div class="form-group my-2">
       <label>Username</label>

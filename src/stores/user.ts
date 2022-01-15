@@ -22,6 +22,8 @@ const checkUser = () => {
 }
 
 const login = (username: string, password: string) => {
+  console.log(username)
+  console.log(password)
   axios
     .post('https://maestrodeljuego.herokuapp.com/auth/token/login/', {
       username: username,
@@ -33,6 +35,7 @@ const login = (username: string, password: string) => {
         login(username, password)
         state.auth_token = data.data.auth_token
       }
+      localStorage.name = username
     })
     .catch((error) => alert(error.message))
 }
@@ -64,18 +67,24 @@ const register = (username: string, password: string, rePassword: string) => {
 }
 
 const logout = () => {
+  console.log('Logging out...')
   state.loggedIn = false
   state.username = ''
   state.password = ''
-  axios.post(
-    'https://maestrodeljuego.herokuapp.com/auth/token/logout/',
-    {},
-    {
-      headers: {
-        Authorization: `Token ${state.auth_token}`
+  axios
+    .post(
+      'https://maestrodeljuego.herokuapp.com/auth/token/logout/',
+      {},
+      {
+        headers: {
+          Authorization: `Token ${state.auth_token}`
+        }
       }
-    }
-  )
+    )
+    .then((res) => {
+      console.log(res)
+      localStorage.name = null
+    })
 }
 
 export default { state, getters, checkUser, login, register, logout }
