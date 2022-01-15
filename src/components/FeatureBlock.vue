@@ -1,5 +1,6 @@
 <template>
   <div class="featureBlock">
+    <img class="feature-icon" :src="featureIconSrc" />
     <h3>{{ featureName }}</h3>
     <p>{{ featureDetails }}</p>
   </div>
@@ -10,11 +11,13 @@ import { Options, Vue } from 'vue-class-component'
 
 @Options({
   props: {
+    featureIconSrc: String,
     featureName: String,
     featureDetails: String
   }
 })
 export default class FeatureBlock extends Vue {
+  featureIconSrc!: string
   featureName!: string
   featureDetails!: string
 }
@@ -27,9 +30,17 @@ img {
   text-align: left;
 }
 h3 {
-  margin-bottom: 4px;
+  margin-top: 10px;
 }
 p {
-  margin-top: 4px;
+  margin-top: 15px;
+  clear: left;
+}
+.feature-icon {
+    fill: red;
+    width: 40px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    float: left;
 }
 </style>
